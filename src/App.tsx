@@ -18,16 +18,12 @@ function App() {
     const [fuelEfficiencyUnit, setFuelEfficiencyUnit] = useState<FuelEfficiencyUnit>("miles-per-imperial-gallon");
 
     const [isDirty, setIsDirty] = useState(false);
-    // const [isDistanceDirty, setIsDistanceDirty] = useState(false);
-    // const [isFuelPriceDirty, setIsFuelPriceDirty] = useState(false);
-    // const [isFuelEfficiencyDirty, setIsFuelEfficiencyDirty] = useState(false);
 
     const distance = parseFloat(distanceString);
     const fuelPrice = parseFloat(fuelPriceString);
     const fuelEfficiency = parseFloat(fuelEfficiencyString);
 
     const isValid = distance !== null && fuelPrice !== null && fuelEfficiency !== null;
-    // const isDirty = isDistanceDirty || isFuelPriceDirty || isFuelEfficiencyDirty;
 
     const currencyUnit = "gbp";
 
@@ -56,12 +52,6 @@ function App() {
                     isFuelEfficiencyValid={fuelEfficiency !== null}
                     isDirty={isDirty}
                     setIsDirty={setIsDirty}
-                    // isDistanceDirty={isDistanceDirty}
-                    // setIsDistanceDirty={setIsDistanceDirty}
-                    // isFuelPriceDirty={isFuelPriceDirty}
-                    // setIsFuelPriceDirty={setIsFuelPriceDirty}
-                    // isFuelEfficiencyDirty={isFuelEfficiencyDirty}
-                    // setIsFuelEfficiencyDirty={setIsFuelEfficiencyDirty}
                 />
 
                 {isValid && (

@@ -1,7 +1,11 @@
 import {
-    FormControl, FormErrorMessage, FormHelperText,
+    FormControl,
+    FormErrorMessage,
+    FormHelperText,
     FormLabel,
-    HStack, NumberDecrementStepper, NumberIncrementStepper,
+    HStack,
+    NumberDecrementStepper,
+    NumberIncrementStepper,
     NumberInput,
     NumberInputField,
     NumberInputStepper,
@@ -29,12 +33,6 @@ type FormProps = {
     isFuelEfficiencyValid: boolean;
     isDirty: boolean;
     setIsDirty: (updatedIsDirty: boolean) => void;
-    // isDistanceDirty: boolean;
-    // setIsDistanceDirty: (updatedIsDistanceDirty: boolean) => void;
-    // isFuelPriceDirty: boolean;
-    // setIsFuelPriceDirty: (updatedIsFuelPriceDirty: boolean) => void;
-    // isFuelEfficiencyDirty: boolean;
-    // setIsFuelEfficiencyDirty: (updatedIsFuelEfficiencyDirty: boolean) => void;
 }
 
 function Form({
@@ -56,12 +54,6 @@ function Form({
     isFuelEfficiencyValid,
     isDirty,
     setIsDirty,
-    // isDistanceDirty,
-    // setIsDistanceDirty,
-    // isFuelPriceDirty,
-    // setIsFuelPriceDirty,
-    // isFuelEfficiencyDirty,
-    // setIsFuelEfficiencyDirty,
 }: FormProps) {
     const currencySymbol = currencyUnit === "usd" ? "$" : "£";
     const formatCurrency = (value: string): string => currencySymbol + value;
