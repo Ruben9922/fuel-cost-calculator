@@ -1,5 +1,5 @@
+import {Card, CardBody, Stat, StatLabel, StatNumber} from "@chakra-ui/react";
 import {CurrencyUnit, DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
-import {Card, CardBody, Stat, StatLabel, StatNumber, Text} from "@chakra-ui/react";
 
 type FuelCostProps = {
     distance: number;

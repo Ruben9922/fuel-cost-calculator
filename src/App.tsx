@@ -2,7 +2,7 @@ import {Alert, AlertDescription, AlertIcon, AlertTitle, Container, Heading, VSta
 import {useState} from "react";
 import Form from "./Form.tsx";
 import FuelCost from "./FuelCost.tsx";
-import {CurrencyUnit, DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
+import {DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
 
 function parseFloat(value: string): number | null {
     const parsedValue = Number.parseFloat(value);
@@ -16,7 +16,6 @@ function App() {
     const [fuelPriceUnit, setFuelPriceUnit] = useState<FuelPriceUnit>("per-liter");
     const [fuelEfficiencyString, setFuelEfficiencyString] = useState("");
     const [fuelEfficiencyUnit, setFuelEfficiencyUnit] = useState<FuelEfficiencyUnit>("miles-per-imperial-gallon");
-    const [currencyUnit, setCurrencyUnit] = useState<CurrencyUnit>("gbp");
 
     const [isDirty, setIsDirty] = useState(false);
     // const [isDistanceDirty, setIsDistanceDirty] = useState(false);
@@ -29,6 +28,8 @@ function App() {
 
     const isValid = distance !== null && fuelPrice !== null && fuelEfficiency !== null;
     // const isDirty = isDistanceDirty || isFuelPriceDirty || isFuelEfficiencyDirty;
+
+    const currencyUnit = "gbp";
 
     return (
         <Container px={10} py={12}>
