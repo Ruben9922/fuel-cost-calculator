@@ -5,10 +5,10 @@ const theme = extendTheme({
         initialColorMode: "dark",
         useSystemColorMode: false,
     },
-    // fonts: {
-    //     heading: "Lato, sans-serif",
-    //     body: "Lato, sans-serif",
-    // },
+    fonts: {
+        heading: "Lato, sans-serif",
+        body: "Lato, sans-serif",
+    },
 });
 
 export default theme;
