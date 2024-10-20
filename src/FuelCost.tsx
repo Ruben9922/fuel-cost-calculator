@@ -1,5 +1,7 @@
 import {Card, CardBody, Stat, StatLabel, StatNumber} from "@chakra-ui/react";
-import {CurrencyUnit, DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
+import {useContext} from "react";
+import {CurrencyContext} from "./App.tsx";
+import {DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
 
 type FuelCostProps = {
     distance: number;
@@ -8,7 +10,6 @@ type FuelCostProps = {
     fuelPriceUnit: FuelPriceUnit;
     fuelEfficiency: number;
     fuelEfficiencyUnit: FuelEfficiencyUnit;
-    currencyUnit: CurrencyUnit;
 };
 
 const milesToKm = 1.609344;
@@ -71,8 +72,9 @@ function FuelCost({
     fuelPriceUnit,
     fuelEfficiency,
     fuelEfficiencyUnit,
-    currencyUnit,
 }: FuelCostProps) {
+    const currencyCode = useContext(CurrencyContext).code;
+
     const fuelCost = computeFuelCost(
         distance,
         distanceUnit,
@@ -84,7 +86,7 @@ function FuelCost({
 
     const numberFormat = new Intl.NumberFormat(undefined, {
         style: "currency",
-        currency: currencyUnit.toUpperCase(),
+        currency: currencyCode.toUpperCase(),
     });
     const fuelCostString = isFinite(fuelCost) ? numberFormat.format(fuelCost) : "";
 

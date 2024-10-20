@@ -12,7 +12,9 @@ import {
     Select,
     VStack
 } from "@chakra-ui/react";
-import {CurrencyUnit, DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
+import {useContext} from "react";
+import {CurrencyContext} from "./App.tsx";
+import {DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
 
 type FormProps = {
     distanceString: string;
@@ -27,7 +29,6 @@ type FormProps = {
     setFuelEfficiencyString: (updatedFuelEfficiencyString: string) => void;
     fuelEfficiencyUnit: FuelEfficiencyUnit;
     setFuelEfficiencyUnit: (updatedFuelEfficiencyUnit: FuelEfficiencyUnit) => void;
-    currencyUnit: CurrencyUnit;
     isDistanceValid: boolean;
     isFuelPriceValid: boolean;
     isFuelEfficiencyValid: boolean;
@@ -48,16 +49,16 @@ function Form({
     setFuelEfficiencyString,
     fuelEfficiencyUnit,
     setFuelEfficiencyUnit,
-    currencyUnit,
     isDistanceValid,
     isFuelPriceValid,
     isFuelEfficiencyValid,
     isDirty,
     setIsDirty,
 }: FormProps) {
-    const currencySymbol = currencyUnit === "usd" ? "$" : "£";
+    const currencySymbol = useContext(CurrencyContext).symbol;
+
     const formatCurrency = (value: string): string => currencySymbol + value;
-    const parse = (value: string): string => value.replace(/^\$£/, "");
+    const parse = (value: string): string => value.replace(currencySymbol, "");
 
     const handleDistanceStringChange = (updatedDistanceString: string): void => {
         setDistanceString(updatedDistanceString);
