@@ -1,6 +1,7 @@
 import {Alert, AlertDescription, AlertIcon, AlertTitle, Container, Spinner, VStack} from "@chakra-ui/react";
 import {createContext, useCallback, useEffect, useState} from "react";
 import {useFetch} from "use-http";
+import {Currency, currencyCodeToCurrency} from "./currency.ts";
 import Form from "./Form.tsx";
 import FuelCost from "./FuelCost.tsx";
 import NavBar from "./NavBar.tsx";
@@ -10,27 +11,24 @@ type CurrencyResult = {
     currencies: Record<string, { name: string, symbol: string }>;
 };
 
-type Currency = {
-    code: string;
-    symbol: string;
-};
-
 function parseFloat(value: string): number | null {
     const parsedValue = Number.parseFloat(value);
     return Number.isFinite(parsedValue) ? parsedValue : null;
 }
 
-const defaultCurrency: Currency = {
+const defaultInitialCurrency: Currency = {
     code: "USD",
+    name: "United States dollar",
     symbol: "$",
 };
 
-export const CurrencyContext = createContext(defaultCurrency);
+export const CurrencyContext = createContext(defaultInitialCurrency);
 
 // todo: nav bar
 function App() {
     const { loading, get, response } = useFetch<CurrencyResult>("https://restcountries.com");
-    const [currency, setCurrency] = useState<Currency>(defaultCurrency);
+    const [initialCurrency, setInitialCurrency] = useState<Currency>(defaultInitialCurrency);
+    const [customCurrency, setCustomCurrency] = useState<string | null>(null);
 
     const [distanceString, setDistanceString] = useState("");
     const [distanceUnit, setDistanceUnit] = useState<DistanceUnit>("miles");
@@ -57,17 +55,21 @@ function App() {
 
         let updatedCurrency: Currency;
         if (!currencyResult || !currencyResult.currencies || Object.values(currencyResult.currencies).length < 1) {
-            updatedCurrency = defaultCurrency;
+            updatedCurrency = defaultInitialCurrency;
         } else {
-            updatedCurrency = Object.keys(currencyResult.currencies)[0] && Object.values(currencyResult.currencies)[0].symbol
+            // todo: use consistent names and/or symbols - either always from restcountries API or always from Intl API
+            updatedCurrency = Object.keys(currencyResult.currencies)[0]
+                && Object.values(currencyResult.currencies)[0]?.name
+                && Object.values(currencyResult.currencies)[0]?.symbol
                 ? {
                     code: Object.keys(currencyResult.currencies)[0],
+                    name: Object.values(currencyResult.currencies)[0].name,
                     symbol: Object.values(currencyResult.currencies)[0].symbol,
                 }
-                : defaultCurrency;
+                : defaultInitialCurrency;
         }
 
-        setCurrency(updatedCurrency);
+        setInitialCurrency(updatedCurrency);
     }, [get, response.ok])
 
     useEffect(() => {
@@ -76,9 +78,15 @@ function App() {
         })();
     }, [updateCurrency]);
 
+    const currency = customCurrency === null ? initialCurrency : currencyCodeToCurrency(customCurrency);
+
     return (
         <>
-            <NavBar />
+            <NavBar
+                initialCurrency={initialCurrency}
+                customCurrency={customCurrency}
+                setCustomCurrency={setCustomCurrency}
+            />
             <Container px={10} py={12}>
                 <VStack spacing={10} justifyItems={"center"}>
                     {loading ? (
