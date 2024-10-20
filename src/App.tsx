@@ -24,7 +24,6 @@ const defaultInitialCurrency: Currency = {
 
 export const CurrencyContext = createContext(defaultInitialCurrency);
 
-// todo: nav bar
 function App() {
     const { loading, get, response } = useFetch<CurrencyResult>("https://restcountries.com");
     const [initialCurrency, setInitialCurrency] = useState<Currency>(defaultInitialCurrency);
