@@ -1,8 +1,9 @@
-import {Alert, AlertDescription, AlertIcon, AlertTitle, Container, Heading, Spinner, VStack} from "@chakra-ui/react";
+import {Alert, AlertDescription, AlertIcon, AlertTitle, Container, Spinner, VStack} from "@chakra-ui/react";
 import {createContext, useCallback, useEffect, useState} from "react";
 import {useFetch} from "use-http";
 import Form from "./Form.tsx";
 import FuelCost from "./FuelCost.tsx";
+import NavBar from "./NavBar.tsx";
 import {DistanceUnit, FuelEfficiencyUnit, FuelPriceUnit} from "./types.ts";
 
 type CurrencyResult = {
@@ -76,62 +77,63 @@ function App() {
     }, [updateCurrency]);
 
     return (
-        <Container px={10} py={12}>
-            <VStack spacing={10} justifyItems={"center"}>
-                <Heading>Fuel Cost Calculator</Heading>
-
-                {loading ? (
-                    <Spinner size="xl" />
-                ) : (
-                    <CurrencyContext.Provider value={currency}>
-                        {/* TODO: Possibly refactor this */}
-                        <Form
-                            distanceString={distanceString}
-                            setDistanceString={setDistanceString}
-                            distanceUnit={distanceUnit}
-                            setDistanceUnit={setDistanceUnit}
-                            fuelPriceString={fuelPriceString}
-                            setFuelPriceString={setFuelPriceString}
-                            fuelPriceUnit={fuelPriceUnit}
-                            setFuelPriceUnit={setFuelPriceUnit}
-                            fuelEfficiencyString={fuelEfficiencyString}
-                            setFuelEfficiencyString={setFuelEfficiencyString}
-                            fuelEfficiencyUnit={fuelEfficiencyUnit}
-                            setFuelEfficiencyUnit={setFuelEfficiencyUnit}
-                            isDistanceValid={distance !== null}
-                            isFuelPriceValid={fuelPrice !== null}
-                            isFuelEfficiencyValid={fuelEfficiency !== null}
-                            isDirty={isDirty}
-                            setIsDirty={setIsDirty}
-                        />
-
-                        {isValid && (
-                            <FuelCost
-                                distance={distance}
+        <>
+            <NavBar />
+            <Container px={10} py={12}>
+                <VStack spacing={10} justifyItems={"center"}>
+                    {loading ? (
+                        <Spinner size="xl" />
+                    ) : (
+                        <CurrencyContext.Provider value={currency}>
+                            {/* TODO: Possibly refactor this */}
+                            <Form
+                                distanceString={distanceString}
+                                setDistanceString={setDistanceString}
                                 distanceUnit={distanceUnit}
-                                fuelPrice={fuelPrice}
+                                setDistanceUnit={setDistanceUnit}
+                                fuelPriceString={fuelPriceString}
+                                setFuelPriceString={setFuelPriceString}
                                 fuelPriceUnit={fuelPriceUnit}
-                                fuelEfficiency={fuelEfficiency}
+                                setFuelPriceUnit={setFuelPriceUnit}
+                                fuelEfficiencyString={fuelEfficiencyString}
+                                setFuelEfficiencyString={setFuelEfficiencyString}
                                 fuelEfficiencyUnit={fuelEfficiencyUnit}
+                                setFuelEfficiencyUnit={setFuelEfficiencyUnit}
+                                isDistanceValid={distance !== null}
+                                isFuelPriceValid={fuelPrice !== null}
+                                isFuelEfficiencyValid={fuelEfficiency !== null}
+                                isDirty={isDirty}
+                                setIsDirty={setIsDirty}
                             />
-                        )}
-                        {!isValid && !isDirty && (
-                            <Alert status="info">
-                                <AlertIcon />
-                                Enter the required info and the fuel cost will be displayed here.
-                            </Alert>
-                        )}
-                        {!isValid && isDirty && (
-                            <Alert status="error">
-                                <AlertIcon />
-                                <AlertTitle>Missing info</AlertTitle>
-                                <AlertDescription>Please enter the required info.</AlertDescription>
-                            </Alert>
-                        )}
-                    </CurrencyContext.Provider>
-                )}
-            </VStack>
-        </Container>
+
+                            {isValid && (
+                                <FuelCost
+                                    distance={distance}
+                                    distanceUnit={distanceUnit}
+                                    fuelPrice={fuelPrice}
+                                    fuelPriceUnit={fuelPriceUnit}
+                                    fuelEfficiency={fuelEfficiency}
+                                    fuelEfficiencyUnit={fuelEfficiencyUnit}
+                                />
+                            )}
+                            {!isValid && !isDirty && (
+                                <Alert status="info">
+                                    <AlertIcon />
+                                    Enter the required info and the fuel cost will be displayed here.
+                                </Alert>
+                            )}
+                            {!isValid && isDirty && (
+                                <Alert status="error">
+                                    <AlertIcon />
+                                    <AlertTitle>Missing info</AlertTitle>
+                                    <AlertDescription>Please enter the required info.</AlertDescription>
+                                </Alert>
+                            )}
+                        </CurrencyContext.Provider>
+                    )}
+                </VStack>
+            </Container>
+        </>
     )
 }
 
