@@ -87,6 +87,7 @@ function FuelCost({
     const numberFormat = new Intl.NumberFormat(undefined, {
         style: "currency",
         currency: currencyCode.toUpperCase(),
+        currencyDisplay: "narrowSymbol",
     });
     const fuelCostString = isFinite(fuelCost) ? numberFormat.format(fuelCost) : "";
 
