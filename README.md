@@ -1,50 +1,17 @@
-# React + TypeScript + Vite
+# Fuel Cost Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Build & Deploy](https://github.com/Ruben9922/fuel-cost-calculator/actions/workflows/build-deploy.yml/badge.svg)](https://github.com/Ruben9922/fuel-cost-calculator/actions/workflows/build-deploy.yml)
 
-Currently, two official plugins are available:
+[App](https://rubendougall.co.uk/projects/fuel-cost-calculator)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Simple fuel cost calculator. Input a distance, fuel price and fuel efficiency, and it will output the fuel cost.
 
-## Expanding the ESLint configuration
+It supports different units:
+* Distance - miles and kilometres
+* Fuel price - per litre, per gallon (imperial) and per gallon (US)
+* Fuel efficiency - mpg (imperial), mpg (US), L/100km and km/L
+* Any currency (though this is just symbolic and doesn't affect the calculations)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Mainly developed this because the existing ones I found had a tonne of ads or don't have a great UX IMO, and also because it was quite an easy programming project. :smile:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+For simplicity, it currently doesn't fetch fuel prices; you have to enter the fuel price manually.
