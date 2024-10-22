@@ -12,7 +12,7 @@ describe("FuelCost", () => {
             fuelPriceUnit: "per-liter" as const,
             fuelEfficiency: 45,
             fuelEfficiencyUnit: "miles-per-us-gallon" as const,
-            fuelCostString: "£10.94",
+            fuelCostString: "$10.94",
         },
         {
             distance: 100,
@@ -21,7 +21,7 @@ describe("FuelCost", () => {
             fuelPriceUnit: "per-liter" as const,
             fuelEfficiency: 45,
             fuelEfficiencyUnit: "miles-per-imperial-gallon" as const,
-            fuelCostString: "£13.13",
+            fuelCostString: "$13.13",
         },
         {
             distance: 100,
@@ -30,7 +30,7 @@ describe("FuelCost", () => {
             fuelPriceUnit: "per-liter" as const,
             fuelEfficiency: 45,
             fuelEfficiencyUnit: "miles-per-imperial-gallon" as const,
-            fuelCostString: "£8.16",
+            fuelCostString: "$8.16",
         },
         {
             distance: 100,
@@ -39,7 +39,7 @@ describe("FuelCost", () => {
             fuelPriceUnit: "per-us-gallon" as const,
             fuelEfficiency: 45,
             fuelEfficiencyUnit: "miles-per-imperial-gallon" as const,
-            fuelCostString: "£30.89",
+            fuelCostString: "$30.89",
         },
         {
             distance: 100,
@@ -48,7 +48,7 @@ describe("FuelCost", () => {
             fuelPriceUnit: "per-imperial-gallon" as const,
             fuelEfficiency: 45,
             fuelEfficiencyUnit: "miles-per-imperial-gallon" as const,
-            fuelCostString: "£59.70",
+            fuelCostString: "$59.70",
         },
         {
             distance: 100,
@@ -57,7 +57,7 @@ describe("FuelCost", () => {
             fuelPriceUnit: "per-liter" as const,
             fuelEfficiency: 50,
             fuelEfficiencyUnit: "liters-per-100km" as const,
-            fuelCostString: "£65.00",
+            fuelCostString: "$65.00",
         },
         {
             distance: 100,
@@ -66,7 +66,7 @@ describe("FuelCost", () => {
             fuelPriceUnit: "per-liter" as const,
             fuelEfficiency: 50,
             fuelEfficiencyUnit: "kilometers-per-liter" as const,
-            fuelCostString: "£2.60",
+            fuelCostString: "$2.60",
         },
     ])("displays correct fuel cost ($distanceUnit, $fuelPriceUnit, $fuelEfficiencyUnit)", ({
         distance,
@@ -85,7 +85,6 @@ describe("FuelCost", () => {
                 fuelPriceUnit={fuelPriceUnit}
                 fuelEfficiency={fuelEfficiency}
                 fuelEfficiencyUnit={fuelEfficiencyUnit}
-                currencyUnit="gbp"
             />
         );
 
